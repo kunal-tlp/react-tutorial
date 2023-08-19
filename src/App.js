@@ -8,7 +8,7 @@ function App()
   return(
     <div className='App'>
         {
-          status? <h1>Hello World</h1>:null
+          status? <h1>Hello World!</h1>:null
         }
         <button onClick={()=>setStatus(!status)}>Update</button>
     </div>
