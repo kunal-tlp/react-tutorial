@@ -1,40 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
-import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
-import Home from './component/Home';
-import About from './component/About';
-import Navbar from './component/Navbar';
-import Page404 from './component/Page404';
-import User from './component/User';
-import Filter from './component/Filter';
-import Contact from './component/Contact';
-import Company from './component/Company';
-import Channel from './component/Channel';
-import Other from './component/Other';
-import Login from './component/Login';
-import Protected from './component/Protected';
+import React from 'react';
+import { CommonContext } from './components/CommonContext';
+import Main from './components/Main';
+import UpdateButton from './components/UpdateButton';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
-function App() {
-  return (
-    <div className='App'>
-      <BrowserRouter>
-      <Navbar />
-        <Routes>
-          <Route path="/" element={<Protected Component={Home} />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/about' element={<Protected Component={About} />} />
-          <Route path='/*' element={<Navigate to="/" />} />
-          <Route path='/user/:name' element={<User />} />
-          <Route path='/filter' element={<Protected Component={Filter} />} />
-          <Route path='/contact/' element={<Protected Component={Contact} />}>
-              <Route path='company' element={<Company />} />
-              <Route path='channel' element={<Channel />} />
-              <Route path='other' element={<Other />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
-  )
+class App extends React.Component {
+  constructor() {
+    super()
+    this.updateColor = (color) => {
+      this.setState({
+        color: color
+      })
+    }
+    this.state = {
+      color: "green",
+      updateColor: this.updateColor
+    }
+  }
+  render() {
+    return (
+      <CommonContext.Provider value={this.state} >
+        <Header />
+        <h1>Complete and easy example</h1>
+        <Main />
+        <UpdateButton />
+        <Footer />
+      </CommonContext.Provider>
+    )
+  }
 }
 
 export default App;
